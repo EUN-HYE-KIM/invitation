@@ -1,0 +1,39 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	font-size: 50%;
+	font-family: 'Noto Sans KR', sans-serif;
+	word-break: keep-all;
+	word-wrap: break-word;
+	letter-spacing: -1px;
+	color: $black90;
+	touch-action: pan-x pan-y;
+	-webkit-touch-callout: none;
+
+	#__nuxt {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+@include foldable {
+
+	html,
+	body {
+		font-size: 75%;
+	}
+}
+
+@include tablet {
+
+	html,
+	body {
+		font-size: 100%;
+
+		#__nuxt {
+			max-width: $max-width;
+			margin: 0 auto;
+		}
+	}
+}
