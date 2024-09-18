@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     preset : 'github-pages' 
   },
   app: {
-    baseURL : '/my-repository-url/',
+    baseURL : '/invitation/',
     head: {
         title: "승민 ♥ 은하 결혼합니다 :)",
         htmlAttrs: {
