@@ -6,23 +6,37 @@ $max-width: 768px;
 
 /* color */
 $black90: #111111;
+$black50: #5A5959;
+$white20: #F0F0F0;
+$white10: #F8F8F8;
 $white00: #ffffff;
+$accent: #E38A76;
+$green: #3AB449;
 $transparent: transparent;
 $bg-black: rgba(0, 0, 0, 0.7);
 $bg-toast: rgba(0, 0, 0, 0.75);
 
+/* opacity */
+$opacity-6: 0.6;
+$opacity-1: 0.1;
+
+/* rgba */
+$black50-6: rgba($black50, $opacity-6);
+$black50-1: rgba($black50, $opacity-1);
+$accent-6: rgba($accent, $opacity-6);
+$accent-1: rgba($accent, $opacity-1);
+
 /* gap */
 $gap-lg: 100px;
 $gap-md: 60px;
-$gap-sm: 32px;
-$gap-xs: 24px;
+$gap-sm: 2rem;
+$gap-xs: 1.5rem;
+$gap-xxs: .625rem;
 
 /* radius */
 $radius-circle: 50%;
 $radius-full: 31.25rem;
-$radius-lg: 1.875rem;
-$radius-sm: 1.25rem;
-$radius-xs: .625rem;
+$radius-xs: .3125rem;
 
 /* font-weight */
 $font-normal: 400;
