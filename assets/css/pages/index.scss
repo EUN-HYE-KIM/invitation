@@ -34,7 +34,7 @@
 /* main */
 main {
     @include flex(column, center, flex-start);
-    background: url(~/assets/img/bg.png) center / 100% no-repeat;
+    background: url(~/assets/img/bg.png) top / 100% no-repeat;
     gap: $gap-lg;
     .img__flower1 {
         width: 3.75rem;
