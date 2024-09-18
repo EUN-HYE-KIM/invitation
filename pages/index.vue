@@ -281,6 +281,10 @@
         <!-- end -->
         <section class="section section--end">
             <img src="~/assets/img/img_end.png" alt="메인 이미지" class="img__end">
+            <h2 class="section__msg">
+                응원해주시고 격려해주신 모든 분들께 감사합니다.<br>
+                행복하게 잘 살겠습니다.
+            </h2>
         </section>
     </main>
 

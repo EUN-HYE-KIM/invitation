@@ -18,6 +18,7 @@
 
 /* font */
 @mixin font($type, $size) {
+    font-weight: $font-normal;
     @if($type == "title" and $size == "lg") {
         font-size: 1.625rem;
         line-height: 1.2;

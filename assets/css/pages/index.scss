@@ -79,6 +79,17 @@ main {
     &--end {
         padding: 0;
     }
+    &--end {
+        @include relative(normal);
+        .section__msg {
+            @include absolute(x-center);
+            top: 22%;
+            width: 100%;
+            @include font(body, md);
+            color: $white00;
+            text-shadow: $shadow-text;
+        }
+    }
 }
 
 /* gallery */
@@ -199,7 +210,14 @@ main {
 
 /* account */
 .account {
+    @include flex(column, center, center);
+    gap: $gap-sm;
     width: 100%;
+    &__item {
+        width: 100%;
+        border-radius: 0 0 $radius-xs $radius-xs;
+        overflow: hidden;
+    }
     &__item > .btn {
         gap: 0;
         width: 100%;
@@ -212,7 +230,7 @@ main {
     &__list-item {
         @include flex(row, center, between);
         height: 4rem;
-        padding: 0 1.875rem;
+        padding: 0 $gap-xs;
         background-color: $white00;
         @include font(body, sm);
         text-align: left;
@@ -223,7 +241,7 @@ main {
         .btn {
             height: 2rem;
             padding: 0 $gap-xxs;
-            background-color: $white10;
+            background-color: $white10;;
         }
     }
     &__text {
@@ -239,6 +257,7 @@ footer {
     background-color: $white20;
     .copyright {
         @include font (body, xs);
+        font-family: "Noto Sans KR", sans-serif;
         color: $black50-6;
         strong {
             color: $black50;
