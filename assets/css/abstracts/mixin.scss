@@ -17,6 +17,33 @@
 }
 
 /* font */
+@mixin font($type, $size) {
+    @if($type == "title" and $size == "lg") {
+        font-size: 1.625rem;
+        line-height: 1.2;
+    }
+    @if($type == "title" and $size == "md") {
+        font-size: 1.375rem;
+        line-height: 1.2;
+    }
+    @if($type == "body" and $size == "lg") {
+        font-size: 1.125rem;
+        line-height: 1.5;
+    }
+    @if($type == "body" and $size == "md") {
+        font-size: 1rem;
+        line-height: 2;
+    }
+    @if($type == "body" and $size == "sm") {
+        font-size: .875rem;
+        line-height: 1.5;
+    }
+    @if($type == "body" and $size == "xs") {
+        font-size: .75rem;
+        line-height: 1.5;
+    }
+
+}
 
 /* ellipsis */
 @mixin ellipsis($line) {
