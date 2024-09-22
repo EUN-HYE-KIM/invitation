@@ -60,7 +60,8 @@
             <ul class="gallery">
                 <li v-for="(item, idx) in galleryList" :key="idx" class="gallery__item">
                     <button type="button" class="btn__gallery">
-                        <img src="~/assets/img/img_main.png" alt="사진">
+                        <!-- <img :src="getImage(idx + 1)" alt="사진"> -->
+                        <img src="~/assets/img/gallery/gallery_1.png" alt="사진">
                     </button>
                 </li>
             </ul>
@@ -72,7 +73,13 @@
 
         <!-- calender -->
         <section class="section section--calender">
-            <ul class="count">
+            <ul v-if="days == -1" class="count">
+                <li class="count__item">
+                    <p class="count__title">D-DAY</p>
+                    <h4 class="count__num"><span class="accent">♥</span></h4>
+                </li>
+            </ul>
+            <ul v-else class="count">
                 <li class="count__item">
                     <p class="count__title">DAYS</p>
                     <h4 class="count__num">{{ days }}</h4>
@@ -108,10 +115,10 @@
             <p v-if="days == 0 && hour <= 0 && min <= 0 && sec <= 0" class="section__text">승민 <span
                     class="accent">♥</span> 은하의 결혼식이 <span class="accent">당일</span> 입니다.
             </p>
-            <p v-if="days == 0 && sec < 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식 <span
+            <p v-if="days == -1" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식 <span
                     class="accent">당일</span> 입니다.
             </p>
-            <p v-if="days < 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
+            <p v-if="days < -1" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
                     days }}</span>일 지났습니다.
             </p>
             <div class="calender">
@@ -337,6 +344,10 @@ const min = ref(0);
 const hour = ref(0);
 const days = ref(0);
 
+const getImage = (index) => {
+    return require(`~/assets/img/gallery/gallery_${index}.png`);
+}
+
 const timer = (date) => {
     const targetDate = new Date(date).getTime(); // 목표 시간 설정
     const nowDate = new Date().getTime(); // 현재 시간 설정
@@ -348,7 +359,7 @@ const timer = (date) => {
     days.value = String(Math.floor((countDate / (1000 * 60 * 60 * 24)))).padStart(2, "0"); // 일
 }
 
-setInterval(timer, 1000, '09/23/2024');
+setInterval(timer, 1000, '04/27/2025');
 </script>
 
 <style scoped>
