@@ -1,9 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
+
   nitro: {
     preset : 'github-pages' 
   },
+
   app: {
     baseURL : '/invitation/',
     head: {
@@ -21,6 +23,7 @@ export default defineNuxtConfig({
         ],
     },
   },
+
   vite: {
       css: {
           preprocessorOptions: {
@@ -30,6 +33,8 @@ export default defineNuxtConfig({
           },
       },
   },
+
   css: ["@/assets/css/main.scss"],
   devtools: { enabled: false },
+  compatibilityDate: "2024-09-22",
 });
