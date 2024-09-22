@@ -12,6 +12,7 @@
     "deploy": "gh-pages —dotfiles -d .output/public"
   },
   "dependencies": {
+    "dayjs": "^1.11.13",
     "nuxt": "^3.13.0",
     "sass-embedded": "^1.78.0",
     "swiper": "^11.1.14",
