@@ -75,22 +75,23 @@
             <ul class="count">
                 <li class="count__item">
                     <p class="count__title">DAYS</p>
-                    <h4 class="count__num">100</h4>
+                    <h4 class="count__num">{{ days }}</h4>
                 </li>
                 <li class="count__item">
                     <p class="count__title">HUOR</p>
-                    <h4 class="count__num">01</h4>
+                    <h4 class="count__num">{{ hour }}</h4>
                 </li>
                 <li class="count__item">
                     <p class="count__title">MIN</p>
-                    <h4 class="count__num">01</h4>
+                    <h4 class="count__num">{{ min }}</h4>
                 </li>
                 <li class="count__item">
                     <p class="count__title">SEC</p>
-                    <h4 class="count__num">01</h4>
+                    <h4 class="count__num">{{ sec }}</h4>
                 </li>
             </ul>
-            <p class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">100일</span> 남았습니다.
+            <p class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
+                    days }}일</span> 남았습니다.
             </p>
             <div class="calender">
                 <div class="calender__top">
@@ -310,6 +311,23 @@ const galleryList = ref([
     { src: "~/assets/img/img_flower_1.png" },
     { src: "~/assets/img/img_flower_1.png" },
 ]);
+const sec = ref(0);
+const min = ref(0);
+const hour = ref(0);
+const days = ref(0);
+
+const timer = (date) => {
+    const targetDate = new Date(date).getTime(); // 목표 시간 설정
+    const nowDate = new Date().getTime(); // 현재 시간 설정
+    const countDate = targetDate - nowDate; // 남은 시간을 밀리초로 반환
+
+    sec.value = Math.floor((countDate / 1000) % 60); // 초
+    min.value = Math.floor((countDate / (1000 * 60)) % 60); // 분
+    hour.value = Math.floor((countDate / (1000 * 60 * 60)) % 24); // 시간
+    days.value = Math.floor((countDate / (1000 * 60 * 60 * 24))); // 일
+}
+
+setInterval(timer, 1000, '04/27/2025');
 </script>
 
 <style scoped>
