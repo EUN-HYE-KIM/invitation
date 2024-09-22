@@ -90,8 +90,29 @@
                     <h4 class="count__num">{{ sec }}</h4>
                 </li>
             </ul>
-            <p class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
+            <p v-if="days > 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
                     days }}일</span> 남았습니다.
+            </p>
+            <p v-if="days == 0 && hour > 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span
+                    class="accent">{{
+                    hour }}시간</span> 남았습니다.
+            </p>
+            <p v-if="days == 0 && hour == 0 && min > 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이
+                <span class="accent">{{
+                    min }}분</span> 남았습니다.
+            </p>
+            <p v-if="days == 0 && hour == 0 && min == 0 && sec > 0" class="section__text">승민 <span
+                    class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
+                    sec }}초</span> 남았습니다.
+            </p>
+            <p v-if="days == 0 && hour <= 0 && min <= 0 && sec <= 0" class="section__text">승민 <span
+                    class="accent">♥</span> 은하의 결혼식이 <span class="accent">당일</span> 입니다.
+            </p>
+            <p v-if="days == 0 && sec < 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식 <span
+                    class="accent">당일</span> 입니다.
+            </p>
+            <p v-if="days < 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
+                    days }}</span>일 지났습니다.
             </p>
             <div class="calender">
                 <div class="calender__top">
@@ -321,13 +342,13 @@ const timer = (date) => {
     const nowDate = new Date().getTime(); // 현재 시간 설정
     const countDate = targetDate - nowDate; // 남은 시간을 밀리초로 반환
 
-    sec.value = Math.floor((countDate / 1000) % 60); // 초
-    min.value = Math.floor((countDate / (1000 * 60)) % 60); // 분
-    hour.value = Math.floor((countDate / (1000 * 60 * 60)) % 24); // 시간
-    days.value = Math.floor((countDate / (1000 * 60 * 60 * 24))); // 일
+    sec.value = String(Math.floor((countDate / 1000) % 60)).padStart(2, "0"); // 초
+    min.value = String(Math.floor((countDate / (1000 * 60)) % 60)).padStart(2, "0"); // 분
+    hour.value = String(Math.floor((countDate / (1000 * 60 * 60)) % 24)).padStart(2, "0"); // 시간
+    days.value = String(Math.floor((countDate / (1000 * 60 * 60 * 24)))).padStart(2, "0"); // 일
 }
 
-setInterval(timer, 1000, '04/27/2025');
+setInterval(timer, 1000, '09/23/2024');
 </script>
 
 <style scoped>
