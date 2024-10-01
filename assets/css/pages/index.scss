@@ -229,7 +229,7 @@ main {
     }
     &__list-item {
         @include flex(row, center, between);
-        height: 4rem;
+        height: 5rem;
         padding: 0 $gap-xs;
         background-color: $white00;
         @include font(body, sm);
