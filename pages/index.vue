@@ -45,7 +45,7 @@
 
             <img src="~/assets/img/img_bird_1.png" alt="꽃 이미지" class="img__bird1">
 
-            <button type="button" class="btn btn__link">
+            <button type="button" class="btn btn__link" @click="showContactModal = true">
                 <img src="~/assets/img/ico_phone.png" alt="전화 아이콘" class="btn__icon">
                 <span class="btn__text">축하 인사말 전하기</span>
             </button>
@@ -104,20 +104,20 @@
                 </li>
             </ul>
             <p v-if="days > 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
-                    days }}일</span> 남았습니다.
+                days }}일</span> 남았습니다.
             </p>
             <p v-if="days == 0 && hour > 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span
                     class="accent">{{
-                    hour }}시간</span> 남았습니다.
+                hour }}시간</span> 남았습니다.
             </p>
             <p v-if="days == 0 && hour == 0 && min > 0" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이
                 <span class="accent">{{
-                    min }}분</span> 남았습니다.
+                min }}분</span> 남았습니다.
             </p>
             <p v-if="days == 0 && hour == 0 && min == 0 && sec > 0" class="section__text">승민 <span
                     class="accent">♥</span> 은하의
                 결혼식이 <span class="accent">{{
-                    sec }}초</span> 남았습니다.
+                sec }}초</span> 남았습니다.
             </p>
             <p v-if="days == 0 && hour <= 0 && min <= 0 && sec <= 0" class="section__text">승민 <span
                     class="accent">♥</span> 은하의
@@ -128,7 +128,7 @@
                 입니다.
             </p>
             <p v-if="days < -1" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
-                    days }}</span>일 지났습니다.
+                days }}</span>일 지났습니다.
             </p>
             <div class="calender">
                 <div class="calender__top">
@@ -210,14 +210,14 @@
                 <span class="small">Tel. 02-3424-7000</span>
             </p>
             <div class="btn__container">
-                <button type="button" class="btn">
+                <a class="btn" target="_blank" href="https://naver.me/IgTNNfub">
                     <img src="~/assets/img/ico_naver.png" alt="네이버 아이콘" class="btn__icon">
                     <span class="btn__text">네이버지도</span>
-                </button>
-                <button type="button" class="btn">
+                </a>
+                <!-- <a class="btn" target="_blank" href="https://naver.me/IgTNNfub">
                     <img src="~/assets/img/ico_kakao_1.png" alt="카카오내비 아이콘" class="btn__icon">
                     <span class="btn__text">카카오내비</span>
-                </button>
+                </a> -->
             </div>
             <ul class="info">
                 <li class="info__item">
@@ -271,17 +271,17 @@
             </p>
             <ul class="account">
                 <li class="account__item">
-                    <button type="button" class="btn">
+                    <button id="groomAccountBtn" type="button" class="btn" @click="slideToggle('groom')">
                         <span class="btn__text">신랑측 계좌번호</span>
                         <img src="~/assets/img/ico_arrow_up.png" alt="링크 아이콘" class="btn__icon">
                     </button>
-                    <ul class="account__list">
+                    <ul class="account__list slide--up">
                         <li class="account__list-item">
                             <div class="account__left">
                                 <p class="account__text">국민은행 434702-01-306083</p>
                                 <p class="account__text">도정희</p>
                             </div>
-                            <button type="button" class="btn btn--sm">
+                            <button type="button" class="btn btn--sm" @click="copyToClipboard('국민은행 434702-01-306083')">
                                 <span class="btn__text">복사</span>
                             </button>
                         </li>
@@ -290,24 +290,24 @@
                                 <p class="account__text">우리은행 1002-154-439032</p>
                                 <p class="account__text">홍승민</p>
                             </div>
-                            <button type="button" class="btn btn--sm">
+                            <button type="button" class="btn btn--sm" @click="copyToClipboard('우리은행 1002-154-439032')">
                                 <span class="btn__text">복사</span>
                             </button>
                         </li>
                     </ul>
                 </li>
                 <li class="account__item">
-                    <button type="button" class="btn">
+                    <button id="brideAccountBtn" type="button" class="btn" @click="slideToggle('bride')">
                         <span class="btn__text">신부측 계좌번호</span>
                         <img src="~/assets/img/ico_arrow_up.png" alt="링크 아이콘" class="btn__icon">
                     </button>
-                    <ul class="account__list">
+                    <ul class="account__list slide--up">
                         <li class="account__list-item">
                             <div class="account__left">
                                 <p class="account__text">우리은행 1002-854-087103</p>
                                 <p class="account__text">김은하</p>
                             </div>
-                            <button type="button" class="btn btn--sm">
+                            <button type="button" class="btn btn--sm" @click="copyToClipboard('우리은행 1002-854-087103')">
                                 <span class="btn__text">복사</span>
                             </button>
                         </li>
@@ -328,19 +328,58 @@
 
     <!-- footer -->
     <footer>
-        <button type="button" class="btn btn__link">
+        <button type="button" class="btn btn__link"
+            @click="copyToClipboard('https://eun-hye-kim.github.io/invitation')">
             <img src="~/assets/img/ico_link.png" alt="링크 아이콘" class="btn__icon">
             <span class="btn__text">링크주소 복사하기<span class="accent">♥</span></span>
         </button>
         <p class="copyright">Copyright 2024.<strong>eunhey_k</strong>. All rights reserved.</p>
     </footer>
 
+    <!-- Contact Modal -->
+    <ModalBaseModal v-if="showContactModal" class="modal--full" @close="showContactModal = false">
+        <template #content>
+            <section class="section section--contact">
+                <div class="section__title-box">
+                    <h3 class="section__subtitle">|: CONTACT :|</h3>
+                    <h2 class="section__title">연락하기</h2>
+                </div>
+                <table class="contact">
+                    <tbody>
+                        <tr>
+                            <th>신랑측</th>
+                        </tr>
+                        <tr v-for="(item, idx) in contactList.slice(0, 2)" :key="idx">
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>
+                                <a class="btn btn__tel" :href="`tel:${item.contactNum}`">전화</a>
+                                <a class="btn btn__sms" :href="`sms:${item.contactNum}`">문자</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>신부측</th>
+                        </tr>
+                        <tr v-for="(item, idx) in contactList.slice(2, 5)" :key="idx">
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>
+                                <a class="btn btn__tel" :href="`tel:${item.contactNum}`">전화</a>
+                                <a class="btn btn__sms" :href="`sms:${item.contactNum}`">문자</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </template>
+    </ModalBaseModal>
+
     <!-- Gallery Modal -->
     <ModalBaseModal v-if="showGalleryModal" class="modal--full" @close="showGalleryModal = false">
         <template #content>
             <swiper :pagination="{
-                    type: 'fraction',
-                }" :navigation="true" :modules="[Pagination, Navigation]" ref="gallerySwiper" @swiper="setSwiper">
+                type: 'fraction',
+            }" :navigation="true" :modules="[Pagination, Navigation]" ref="gallerySwiper" @swiper="setSwiper">
                 <swiper-slide v-for="(item, idx) in galleryList" :key="idx">
                     <img :src="item.src" alt="사진">
                 </swiper-slide>
@@ -350,12 +389,21 @@
 </template>
 
 <script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Pagination, Navigation } from 'swiper/modules';
+import { copyToClipboard } from "~/assets/js/common";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Pagination, Navigation } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+const contactList = ref([
+    { title: "신랑", name: "홍승민", contactNum: "01090960950" },
+    { title: "신랑 어머니", name: "도정희", contactNum: "01090960950" }, // 수정필요
+    { title: "신부", name: "김은하", contactNum: "01094675895" },
+    { title: "신부 아버지", name: "김호일", contactNum: "01075730820" },
+    { title: "신부 어머니", name: "김정자", contactNum: "01077012503" },
+]);
+const showContactModal = ref(false);
 const isFullGallery = ref(false);
 const galleryList = ref([]);
 const showGalleryModal = ref(false);
@@ -401,6 +449,18 @@ const timer = (date) => {
     days.value = String(Math.floor((countDate / (1000 * 60 * 60 * 24)))).padStart(2, "0"); // 일
 }
 setInterval(timer, 1000, '04/27/2025');
+
+// Slide Toggle
+const slideToggle = (type) => {
+    const el = document.getElementById(`${type}AccountBtn`);
+    if (el.nextSibling.classList.contains("slide--up")) {
+        el.nextSibling.classList.remove("slide--up");
+        el.nextSibling.classList.add("slide--down");
+    } else {
+        el.nextSibling.classList.remove("slide--down");
+        el.nextSibling.classList.add("slide--up");
+    }
+}
 </script>
 
 <style scoped>
