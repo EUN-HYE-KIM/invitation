@@ -1,4 +1,4 @@
-/* grid */
+/* Grid */
 .sticky {
     background-color: $white00;
     z-index: $header-z;
@@ -26,6 +26,7 @@
     }
 }
 
+/* Swiper */
 .swiper {
     width: 100%;
     height: 100%;
@@ -51,5 +52,37 @@
     }
     .swiper-pagination-fraction {
         color: $black50;
+    }
+}
+
+/* Toast */
+#toast {
+    @include fixed-center;
+    width: 85%;
+    padding: $gap-xxs;
+    background-color: $bg-toast;
+    border-radius: $radius-full;
+    @include font(body, sm);
+    text-align: center;
+    color: $white00;
+    z-index: $modal-z;
+}
+
+/* Slide Up Down */
+.slide--up {
+    opacity: 0;
+    max-height: 0;
+}
+.slide--down {
+    opacity: 1;
+    max-height: 500px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
