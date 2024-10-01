@@ -25,3 +25,31 @@
         max-width: $max-width;
     }
 }
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    .swiper-wrapper {
+        height: 100%;
+    }
+    .swiper-slide {
+        @include flex(row, center, center);
+    }
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: $black50;
+        z-index: $modal-z;
+        &::after {
+            font-size: 1.5rem;
+        }
+    }
+    .swiper-button-prev {
+        left: $gap-xs;
+    }
+    .swiper-button-next {
+        right: $gap-xs;
+    }
+    .swiper-pagination-fraction {
+        color: $black50;
+    }
+}

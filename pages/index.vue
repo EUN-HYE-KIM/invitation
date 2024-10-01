@@ -58,14 +58,20 @@
                 <h2 class="section__title">갤러리</h2>
             </div>
             <ul class="gallery">
-                <li v-for="(item, idx) in galleryList" :key="idx" class="gallery__item">
-                    <button type="button" class="btn__gallery">
-                        <!-- <img :src="getImage(idx + 1)" alt="사진"> -->
-                        <img src="~/assets/img/gallery/gallery_1.png" alt="사진">
+                <li v-for="(item, idx) in galleryList.slice(0, 9)" :key="idx" class="gallery__item">
+                    <button type="button" class="btn__gallery" @click="openGalleryModal(idx)">
+                        <img :src="item.src" alt="사진">
                     </button>
                 </li>
+                <template v-if="isFullGallery">
+                    <li v-for="(item, idx) in galleryList.slice(9, 41)" :key="idx + 9" class="gallery__item">
+                        <button type="button" class="btn__gallery" @click="openGalleryModal(idx + 9)">
+                            <img :src="item.src" alt="사진">
+                        </button>
+                    </li>
+                </template>
             </ul>
-            <button type="button" class="btn">
+            <button type="button" class="btn" @click="isFullGallery = true">
                 <span class="btn__text">사진 더보기</span>
                 <img src="~/assets/img/ico_arrow_down.png" alt="아래 화살표 아이콘" class="btn__icon">
             </button>
@@ -109,14 +115,17 @@
                     min }}분</span> 남았습니다.
             </p>
             <p v-if="days == 0 && hour == 0 && min == 0 && sec > 0" class="section__text">승민 <span
-                    class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
+                    class="accent">♥</span> 은하의
+                결혼식이 <span class="accent">{{
                     sec }}초</span> 남았습니다.
             </p>
             <p v-if="days == 0 && hour <= 0 && min <= 0 && sec <= 0" class="section__text">승민 <span
-                    class="accent">♥</span> 은하의 결혼식이 <span class="accent">당일</span> 입니다.
+                    class="accent">♥</span> 은하의
+                결혼식이 <span class="accent">당일</span> 입니다.
             </p>
             <p v-if="days == -1" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식 <span
-                    class="accent">당일</span> 입니다.
+                    class="accent">당일</span>
+                입니다.
             </p>
             <p v-if="days < -1" class="section__text">승민 <span class="accent">♥</span> 은하의 결혼식이 <span class="accent">{{
                     days }}</span>일 지났습니다.
@@ -325,29 +334,62 @@
         </button>
         <p class="copyright">Copyright 2024.<strong>eunhey_k</strong>. All rights reserved.</p>
     </footer>
+
+    <!-- Gallery Modal -->
+    <ModalBaseModal v-if="showGalleryModal" class="modal--full" @close="showGalleryModal = false">
+        <template #content>
+            <swiper :pagination="{
+                    type: 'fraction',
+                }" :navigation="true" :modules="[Pagination, Navigation]" ref="gallerySwiper" @swiper="setSwiper">
+                <swiper-slide v-for="(item, idx) in galleryList" :key="idx">
+                    <img :src="item.src" alt="사진">
+                </swiper-slide>
+            </swiper>
+        </template>
+    </ModalBaseModal>
 </template>
 
 <script setup>
-const galleryList = ref([
-    { src: "~/assets/img/img_flower_1.png" },
-    { src: "~/assets/img/img_flower_1.png" },
-    { src: "~/assets/img/img_flower_1.png" },
-    { src: "~/assets/img/img_flower_1.png" },
-    { src: "~/assets/img/img_flower_1.png" },
-    { src: "~/assets/img/img_flower_1.png" },
-    { src: "~/assets/img/img_flower_1.png" },
-    { src: "~/assets/img/img_flower_1.png" },
-    { src: "~/assets/img/img_flower_1.png" },
-]);
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+const isFullGallery = ref(false);
+const galleryList = ref([]);
+const showGalleryModal = ref(false);
+const gallerySwiper = ref(null);
 const sec = ref(0);
 const min = ref(0);
 const hour = ref(0);
 const days = ref(0);
 
-const getImage = (index) => {
-    return require(`~/assets/img/gallery/gallery_${index}.png`);
+onMounted(() => {
+    getGalleryImg(1, 41);
+});
+
+// Get Gallery Img
+const getGalleryImg = (startSize, endSize) => {
+    for (let i = startSize; i <= endSize; i++) {
+        galleryList.value.push({ src: `img/gallery/gallery_${i}.png` });
+    }
 }
 
+// Set Swiper
+const setSwiper = (swiper) => {
+    gallerySwiper.value = swiper;
+};
+
+// Open Gallery Modal
+const openGalleryModal = (idx) => {
+    showGalleryModal.value = true;
+    nextTick(() => {
+        gallerySwiper.value.slideTo(idx, 0);
+    });
+}
+
+// Set Count
 const timer = (date) => {
     const targetDate = new Date(date).getTime(); // 목표 시간 설정
     const nowDate = new Date().getTime(); // 현재 시간 설정
@@ -358,7 +400,6 @@ const timer = (date) => {
     hour.value = String(Math.floor((countDate / (1000 * 60 * 60)) % 24)).padStart(2, "0"); // 시간
     days.value = String(Math.floor((countDate / (1000 * 60 * 60 * 24)))).padStart(2, "0"); // 일
 }
-
 setInterval(timer, 1000, '04/27/2025');
 </script>
 
