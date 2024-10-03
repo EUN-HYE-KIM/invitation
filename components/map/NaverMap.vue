@@ -22,7 +22,7 @@ function initMap() {
 
     const map = new naver.maps.Map('map', {
         center: position,
-        zoom: 15.5 // 초기 줌 레벨 설정
+        zoom: 16 // 초기 줌 레벨 설정
     });
 
     const markerOptions = {
