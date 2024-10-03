@@ -5,7 +5,6 @@ export default defineNuxtConfig({
   nitro: {
     preset : 'github-pages' 
   },
-
   app: {
     baseURL : '/invitation/',
     head: {
@@ -32,6 +31,12 @@ export default defineNuxtConfig({
               },
           },
       },
+  },
+
+  runtimeConfig: {
+        public: {
+            clientId: process.env.NUXT_APP_ClientId,
+        },
   },
 
   css: ["@/assets/css/main.scss"],

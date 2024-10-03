@@ -39,7 +39,7 @@ const removeToast = () => {
 const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text)
         .then(() => {
-            setToast("클립보드에 복사되었습니다.");
+            setToast("클립보드에 복사되었습니다");
         })
         .catch(err => {
             setToast("클릭보드 복사실패: ", err);

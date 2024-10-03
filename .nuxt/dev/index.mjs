@@ -100,7 +100,9 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {}
+  "public": {
+    "clientId": "oqrmz7stt8"
+  }
 };
 const envOptions = {
   prefix: "NITRO_",
