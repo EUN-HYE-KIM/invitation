@@ -45,7 +45,7 @@
 
             <img src="~/assets/img/img_bird_1.png" alt="꽃 이미지" class="img__bird1">
 
-            <button type="button" class="btn btn__link" @click="showContactModal = true">
+            <button type="button" class="btn btn__link" @click="showContactModal = true, scrollControl(false)">
                 <img src="~/assets/img/ico_phone.png" alt="전화 아이콘" class="btn__icon">
                 <span class="btn__text">축하 인사말 전하기</span>
             </button>
@@ -219,6 +219,7 @@
                     <span class="btn__text">카카오내비</span>
                 </a> -->
             </div>
+            <MapNaverMap />
             <ul class="info">
                 <li class="info__item">
                     <h4 class="info__title">지하철</h4>
@@ -273,7 +274,7 @@
                 <li class="account__item">
                     <button id="groomAccountBtn" type="button" class="btn" @click="slideToggle('groom')">
                         <span class="btn__text">신랑측 계좌번호</span>
-                        <img src="~/assets/img/ico_arrow_up.png" alt="링크 아이콘" class="btn__icon">
+                        <img src="~/assets/img/ico_arrow_down.png" alt="링크 아이콘" class="btn__icon">
                     </button>
                     <ul class="account__list slide--up">
                         <li class="account__list-item">
@@ -299,7 +300,7 @@
                 <li class="account__item">
                     <button id="brideAccountBtn" type="button" class="btn" @click="slideToggle('bride')">
                         <span class="btn__text">신부측 계좌번호</span>
-                        <img src="~/assets/img/ico_arrow_up.png" alt="링크 아이콘" class="btn__icon">
+                        <img src="~/assets/img/ico_arrow_down.png" alt="링크 아이콘" class="btn__icon">
                     </button>
                     <ul class="account__list slide--up">
                         <li class="account__list-item">
@@ -337,7 +338,7 @@
     </footer>
 
     <!-- Contact Modal -->
-    <ModalBaseModal v-if="showContactModal" class="modal--full" @close="showContactModal = false">
+    <ModalBaseModal v-if="showContactModal" class="modal--full" @close="showContactModal = false, scrollControl(true)">
         <template #content>
             <section class="section section--contact">
                 <div class="section__title-box">
@@ -375,7 +376,7 @@
     </ModalBaseModal>
 
     <!-- Gallery Modal -->
-    <ModalBaseModal v-if="showGalleryModal" class="modal--full" @close="showGalleryModal = false">
+    <ModalBaseModal v-if="showGalleryModal" class="modal--full" @close="showGalleryModal = false, scrollControl(true)">
         <template #content>
             <swiper :pagination="{
                 type: 'fraction',
@@ -389,7 +390,7 @@
 </template>
 
 <script setup>
-import { copyToClipboard } from "~/assets/js/common";
+import { scrollControl, copyToClipboard } from "~/assets/js/common";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation } from "swiper/modules";
 import 'swiper/css';
@@ -412,9 +413,29 @@ const sec = ref(0);
 const min = ref(0);
 const hour = ref(0);
 const days = ref(0);
+const sections = ref([]);
 
 onMounted(() => {
+    // 갤러리 사진 가져오기
     getGalleryImg(1, 41);
+
+    // 모든 섹션 선택
+    sections.value = document.querySelectorAll(".section");
+
+    // Intersection Observer 설정
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("fadeIn--visible");
+                observer.unobserve(entry.target); // 한번만 애니메이션 적용
+            }
+        });
+    }, { threshold: 0.1 }); // 10%가 보일 때 트리거
+
+    sections.value.forEach(section => {
+        section.classList.add("fadeIn");
+        observer.observe(section);
+    });
 });
 
 // Get Gallery Img
@@ -432,6 +453,7 @@ const setSwiper = (swiper) => {
 // Open Gallery Modal
 const openGalleryModal = (idx) => {
     showGalleryModal.value = true;
+    scrollControl(false);
     nextTick(() => {
         gallerySwiper.value.slideTo(idx, 0);
     });
@@ -453,13 +475,9 @@ setInterval(timer, 1000, '04/27/2025');
 // Slide Toggle
 const slideToggle = (type) => {
     const el = document.getElementById(`${type}AccountBtn`);
-    if (el.nextSibling.classList.contains("slide--up")) {
-        el.nextSibling.classList.remove("slide--up");
-        el.nextSibling.classList.add("slide--down");
-    } else {
-        el.nextSibling.classList.remove("slide--down");
-        el.nextSibling.classList.add("slide--up");
-    }
+    const sibling = el.nextSibling;
+    sibling.classList.toggle("slide--up");
+    sibling.classList.toggle("slide--down");
 }
 </script>
 
