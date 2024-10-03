@@ -46,7 +46,7 @@ declare module 'nuxt/schema' {
    },
   }
   interface PublicRuntimeConfig {
-
+   clientId: string,
   }
 }
 declare module 'vue' {
