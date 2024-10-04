@@ -22,3 +22,11 @@ bin/*.txt
 doc/**/*.pdf
 
 .env
+
+.nuxt
+
+node_modules
+
+.output
+
+dist
