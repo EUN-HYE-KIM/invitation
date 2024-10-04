@@ -25,6 +25,4 @@ doc/**/*.pdf
 
 .nuxt
 
-node_modules
-
 dist
