@@ -23,10 +23,10 @@ doc/**/*.pdf
 
 .env
 
-.nuxt
+# .nuxt
 
-node_modules
+# node_modules
 
-.output
+# .output
 
-dist
+# dist
