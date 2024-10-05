@@ -12,7 +12,7 @@
                 <h2 class="section__title">2025.04.27</h2>
                 <h3 class="section__subtitle">SUNDAY</h3>
             </div>
-            <img src="~/assets/img/img_main.png" alt="메인 이미지">
+            <img src="~/assets/img/img_main.jpg" alt="메인 이미지">
             <h3 class="section__name">승민 <span class="accent">♥</span> 은하</h3>
             <p class="section__text">2025년 04월 27일 일요일 오전 11시<br />웨딩스퀘어 강변 3F, 루시드홀 </p>
         </section>
@@ -64,7 +64,7 @@
                     </button>
                 </li>
                 <template v-if="isFullGallery">
-                    <li v-for="(item, idx) in galleryList.slice(9, 41)" :key="idx + 9" class="gallery__item">
+                    <li v-for="(item, idx) in galleryList.slice(9, 35)" :key="idx + 9" class="gallery__item">
                         <button type="button" class="btn__gallery" @click="openGalleryModal(idx + 9)">
                             <img :src="item.src" alt="사진">
                         </button>
@@ -319,7 +319,7 @@
 
         <!-- end -->
         <section class="section section--end">
-            <img src="~/assets/img/img_end.png" alt="메인 이미지" class="img__end">
+            <img src="~/assets/img/img_end.jpg" alt="메인 이미지" class="img__end">
             <h2 class="section__msg">
                 응원해주시고 격려해주신 모든 분들께 감사합니다.<br>
                 행복하게 잘 살겠습니다.
@@ -334,7 +334,13 @@
             <img src="~/assets/img/ico_link.png" alt="링크 아이콘" class="btn__icon">
             <span class="btn__text">링크주소 복사하기<span class="accent">♥</span></span>
         </button>
-        <p class="copyright">Copyright 2024.<strong>eunhey_k</strong>. All rights reserved.</p>
+        <div>
+            <img src="~/assets/img/img_my.png" alt="이미지" class="img__my">
+            <p class="copyright">- 언니가 사랑하는 은하에게 -</p>
+        </div>
+        <p class="copyright">
+            Copyright 2024.<strong>eunhey_k</strong>. All rights reserved.
+        </p>
     </footer>
 
     <!-- Contact Modal -->
@@ -399,7 +405,7 @@ import 'swiper/css/navigation';
 
 const contactList = ref([
     { title: "신랑", name: "홍승민", contactNum: "01090960950" },
-    { title: "신랑 어머니", name: "도정희", contactNum: "01090960950" }, // 수정필요
+    { title: "신랑 어머니", name: "도정희", contactNum: "01021081327" },
     { title: "신부", name: "김은하", contactNum: "01094675895" },
     { title: "신부 아버지", name: "김호일", contactNum: "01075730820" },
     { title: "신부 어머니", name: "김정자", contactNum: "01077012503" },
@@ -417,7 +423,7 @@ const sections = ref([]);
 
 onMounted(() => {
     // 갤러리 사진 가져오기
-    getGalleryImg(1, 41);
+    getGalleryImg(1, 35);
 
     // 모든 섹션 선택
     sections.value = document.querySelectorAll(".section");
@@ -441,7 +447,7 @@ onMounted(() => {
 // Get Gallery Img
 const getGalleryImg = (startSize, endSize) => {
     for (let i = startSize; i <= endSize; i++) {
-        galleryList.value.push({ src: `img/gallery/gallery_${i}.png` });
+        galleryList.value.push({ src: `img/gallery/gallery_${i}.jpg` });
     }
 }
 

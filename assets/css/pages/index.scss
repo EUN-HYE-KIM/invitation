@@ -307,6 +307,10 @@ footer {
         @include font (body, xs);
         font-family: "Noto Sans KR", sans-serif;
         color: $black50-6;
+        span {
+            display: inline-block;
+            padding-bottom: .375rem;
+        }
         strong {
             color: $black50;
         }
