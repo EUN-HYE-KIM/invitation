@@ -6,13 +6,10 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import { useRuntimeConfig } from '#app';
-
-const clientId = useRuntimeConfig().public.clientId;
 
 onMounted(() => {
     const script = document.createElement('script');
-    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}`;
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oqrmz7stt8`;
     script.onload = initMap; // 스크립트 로드 후 지도 초기화
     document.head.appendChild(script);
 });
